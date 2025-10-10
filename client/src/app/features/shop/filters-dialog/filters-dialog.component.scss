@@ -1,0 +1,90 @@
+:host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected {
+  background-color: #2563eb !important; /* Tailwind blue-600 */
+  color: #fff !important;
+  border-radius: 8px;
+}
+
+:host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mdc-list-item__primary-text {
+  color: #fff !important;
+}
+
+:host ::ng-deep .mat-mdc-list-option:hover {
+  background-color: #e0e7ff !important; /* light blue hover */
+}
+// for tick box
+// :host ::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background {
+//   background-color: #2563eb !important; /* blue background */
+//   border-color: #2563eb !important;     /* blue border */
+// }
+
+// :host ::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark {
+//   color: #fff !important; /* white tick */
+// }
+
+// // filters-dialog tick box selection css
+// :host ::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background {
+//   background-color: #2563eb !important;
+//   border-color: #2563eb !important;
+// }
+// :host ::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark,
+// :host ::ng-deep .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark-path {
+//   stroke: #fff !important;
+//   fill: #fff !important;
+// }
+
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mat-mdc-pseudo-checkbox,
+// :host ::ng-deep .mdc-list-item--selected .mat-mdc-pseudo-checkbox {
+//   background-color: #2563eb !important;
+//   border-color: #2563eb !important;
+//   color: #fff !important;
+// }
+
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mat-mdc-pseudo-checkbox svg,
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mat-mdc-pseudo-checkbox path {
+//   stroke: #fff !important;
+//   fill: #fff !important;
+// }
+
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected,
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mdc-list-item__primary-text {
+//   color: #fff !important;
+// }
+
+// // filters-dialog tick box selection css
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mdc-checkbox__background {
+//   background-color: #2563eb !important;
+//   border-color: #2563eb !important;
+// }
+
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mdc-checkbox__checkmark,
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mdc-checkbox__checkmark-path {
+//   stroke: #fff !important;
+//   fill: #fff !important;
+//   color: #fff !important;
+// }
+
+// :host ::ng-deep .mat-mdc-list-option.mdc-list-item--selected .mdc-list-item__primary-text {
+//   color: #fff !important;
+// }
+
+// // filters-dialog tick box selection css
+// :host {
+//   --mdc-checkbox-selected-icon-color: #fff;
+//   --mdc-checkbox-selected-checkmark-color: #fff;
+//   --mdc-checkbox-selected-container-color: #2563eb;
+//   --mdc-checkbox-selected-outline-color: #2563eb;
+// }
+
+// ONLY THIS WORKS
+// filters-dialog tick box selection css
+:host ::ng-deep mat-list-option
+  .mdc-checkbox__native-control:checked + .mdc-checkbox__background {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+:host ::ng-deep mat-list-option
+  .mdc-checkbox__native-control:checked
+  + .mdc-checkbox__background
+  .mdc-checkbox__checkmark-path {
+  stroke: #fff !important;
+}

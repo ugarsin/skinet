@@ -1,0 +1,175 @@
+@use '@angular/material' as mat;
+@import "tailwindcss";
+
+:root {
+    @include mat.button-overrides((
+        filled-container-shape: '20px',
+        outlined-container-shape: '20px'
+    ));
+    // @include mat.badge-overrides((
+    //     background-color: red,
+    //     text-color: white,
+    // ));
+}
+
+button[color="primary"] {
+  font-weight: bold;
+  color: blue !important;
+//   color: white !important;
+//   background-color: blue;
+}
+
+.container {
+    @apply mx-auto max-w-screen-2xl px-6
+}
+
+// filters-dialog tick box selection css
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background {
+//   background-color: #2563eb !important;
+//   border-color: #2563eb !important;
+// }
+
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark {
+//   color: #fff !important;
+// }
+
+// filters-dialog tick box selection css
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background {
+//   background-color: var(--md-sys-color-primary) !important;
+//   border-color: var(--md-sys-color-primary) !important;
+// }
+
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark {
+//   color: var(--md-sys-color-on-primary) !important;
+// }
+
+// // filters-dialog tick box selection css
+// /* Real mat-checkbox (if you ever use <mat-checkbox>) */
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__background,
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__native-control:checked + .mdc-checkbox__background {
+//   background-color: #2563eb !important; /* blue */
+//   border-color: #2563eb !important;
+// }
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark,
+// .mat-mdc-checkbox.mat-mdc-checkbox-checked .mdc-checkbox__checkmark-path {
+//   stroke: #fff !important;
+//   fill: #fff !important;
+//   color: #fff !important;
+// }
+
+// /* --- Pseudo-checkbox used inside mat-selection-list / mat-list-option --- */
+// /* Make the little square blue when the option is selected */
+// .mat-mdc-list-option.mdc-list-item--selected .mat-mdc-pseudo-checkbox,
+// .mdc-list-item--selected .mat-mdc-pseudo-checkbox,
+// .mat-mdc-list-option.mdc-list-item--selected .mdc-list-item__meta .mat-mdc-pseudo-checkbox {
+//   background-color: #2563eb !important;
+//   border-color: #2563eb !important;
+//   color: #fff !important;
+// }
+
+// /* If the pseudo-checkbox renders an svg/path for the checkmark, force it white */
+// .mat-mdc-list-option.mdc-list-item--selected .mat-mdc-pseudo-checkbox svg,
+// .mat-mdc-list-option.mdc-list-item--selected .mat-mdc-pseudo-checkbox path,
+// .mdc-list-item--selected .mat-mdc-pseudo-checkbox svg,
+// .mdc-list-item--selected .mat-mdc-pseudo-checkbox path {
+//   stroke: #fff !important;
+//   fill: #fff !important;
+// }
+
+// /* Also make the row text white when selected (optional) */
+// .mat-mdc-list-option.mdc-list-item--selected,
+// .mat-mdc-list-option.mdc-list-item--selected .mdc-list-item__primary-text {
+//   color: #fff !important;
+// }
+
+// // filters-dialog tick box selection css
+// /* Selected checkbox background */
+// .mat-mdc-list-option.mdc-list-item--selected .mdc-checkbox__background {
+//   background-color: #2563eb !important; /* blue background */
+//   border-color: #2563eb !important;
+// }
+
+// /* Make the tick mark white */
+// .mat-mdc-list-option.mdc-list-item--selected .mdc-checkbox__checkmark,
+// .mat-mdc-list-option.mdc-list-item--selected .mdc-checkbox__checkmark-path {
+//   stroke: #fff !important;
+//   fill: #fff !important;
+//   color: #fff !important;
+// }
+
+// /* Optional: make the list text white too */
+// .mat-mdc-list-option.mdc-list-item--selected .mdc-list-item__primary-text {
+//   color: #fff !important;
+// }
+
+// /* Optional: add hover effect for better UX */
+// .mat-mdc-list-option:hover .mdc-checkbox__background {
+//   background-color: #93c5fd !important; /* light blue */
+// }
+
+// // filters-dialog tick box selection css
+// /* Target all checkboxes */
+// .mdc-checkbox {
+//   --mdc-checkbox-selected-icon-color: #fff;          /* checkmark color when selected */
+//   --mdc-checkbox-selected-focus-icon-color: #fff;
+//   --mdc-checkbox-selected-hover-icon-color: #fff;
+//   --mdc-checkbox-selected-pressed-icon-color: #fff;
+
+//   --mdc-checkbox-selected-checkmark-color: #fff;     /* extra safety for tick path */
+
+//   --mdc-checkbox-selected-container-color: #2563eb;  /* background when checked */
+//   --mdc-checkbox-selected-hover-container-color: #1d4ed8;
+//   --mdc-checkbox-selected-focus-container-color: #1d4ed8;
+//   --mdc-checkbox-selected-pressed-container-color: #1e40af;
+
+//   --mdc-checkbox-selected-outline-color: #2563eb;    /* border when selected */
+// }
+
+// // ONLY THIS WoRKS
+// // filters-dialog tick box selection css 
+// /* --- Change background + tick color for any checked checkbox in a list option --- */
+// mat-list-option .mdc-checkbox__native-control:checked + .mdc-checkbox__background {
+//   background-color: #2563eb !important;   /* blue fill */
+//   border-color: #2563eb !important;
+// }
+
+// /* make the checkmark itself white */
+// mat-list-option .mdc-checkbox__native-control:checked
+//   + .mdc-checkbox__background .mdc-checkbox__checkmark-path {
+//   stroke: #fff !important;
+// }
+
+// /* optional – slightly lighter blue on hover while checked */
+// mat-list-option .mdc-checkbox__native-control:checked:hover + .mdc-checkbox__background {
+//   background-color: #1e40af !important;
+// }
+
+// /* optional – when unchecked, keep border visible */
+// mat-list-option .mdc-checkbox__background {
+//   border-color: #9ca3af !important; /* gray-400 */
+// }
+
+// // ONLY THIS WoRKS
+// // THIS IS THE PRIMARY COLOR THEME VERSION, SELECT AND USE THE PRIMARY COLOR THEME
+/* Use Angular Material CSS variables for dynamic theming */
+mat-list-option .mdc-checkbox__native-control:checked + .mdc-checkbox__background {
+  background-color: var(--md-sys-color-primary) !important;   /* primary background */
+  border-color: var(--md-sys-color-primary) !important;       /* primary border */
+}
+
+/* White tick mark for contrast */
+mat-list-option .mdc-checkbox__native-control:checked
+  + .mdc-checkbox__background .mdc-checkbox__checkmark-path {
+  stroke: var(--md-sys-color-on-primary, #fff) !important;    /* “on-primary” color */
+}
+
+/* Optional: lighter hover shade derived from theme if available */
+mat-list-option .mdc-checkbox__native-control:checked:hover + .mdc-checkbox__background {
+  background-color: color-mix(in srgb, var(--md-sys-color-primary) 85%, white) !important;
+}
+
+/* Optional: default border when unchecked */
+mat-list-option .mdc-checkbox__background {
+  border-color: var(--md-sys-color-outline-variant, #9ca3af) !important;
+}
+

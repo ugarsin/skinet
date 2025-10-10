@@ -4,6 +4,7 @@ using Core.Interfaces;
 using Core.Specifications;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,14 +19,13 @@ namespace API.Controllers
         )
         {
             var spec = new ProductSpecification(productSpecParams);
-            return Ok(
-                await CreatePagedResult<Product>(
+            var result = await CreatePagedResult<Product>(
                     productRepository,
                     spec,
                     productSpecParams.PageIndex,
-                    productSpecParams.PageSize
-                )
-            );
+                    productSpecParams.PageSize);
+            var products = (result as OkObjectResult)?.Value as Pagination<Product>;
+            return Ok(products);
         }
 
         [HttpGet("{id:int}")]

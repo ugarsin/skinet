@@ -11,7 +11,7 @@ namespace API.Controllers
     [ApiController]
     public class BaseApiController : ControllerBase
     {
-        protected async Task<ActionResult> CreatePagedResult<T>(
+        protected async Task<IActionResult> CreatePagedResult<T>(
             IGenericRepository<T> repository,
             ISpecification<T> specification,
             int pageIndex, 
