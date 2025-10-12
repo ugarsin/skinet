@@ -49,6 +49,10 @@ button[color="primary"] {
 //   background-color: blue;
 }
 
+.match-input-height {
+  height: var(--mat-form-field-container-height) !important;
+}
+
 // .container {
 //     @apply mx-auto max-w-screen-2xl px-6
 // }
