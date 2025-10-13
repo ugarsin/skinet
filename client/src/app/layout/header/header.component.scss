@@ -13,3 +13,11 @@
     width: 32px;
     height: 32px;
 }
+
+a {
+    &.active {
+        color: blue;
+        font-weight: 900;
+        // background-color: blue;
+    }
+}
