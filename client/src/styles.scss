@@ -57,6 +57,21 @@ button.match-input-height {
   border-right-style: none !important;
 }
 
+.snack-error {
+  @include mat.snack-bar-overrides((
+    button-color: white,
+    container-color: red,
+    supporting-text-color: white
+  ));
+}
+
+.snack-success {
+  @include mat.snack-bar-overrides((
+    button-color: white,
+    container-color: green,
+    supporting-text-color: white
+  ));
+}
 // .container {
 //     @apply mx-auto max-w-screen-2xl px-6
 // }
