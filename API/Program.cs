@@ -2,12 +2,21 @@ using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors();
 // Add services to the container.
-
+builder.Services.AddSingleton<IConnectionMultiplexer>(
+    config =>
+    {
+        var connString = builder.Configuration.GetConnectionString("Redis")
+            ?? throw new Exception("Cannot get Redis connection string");
+        var configuraion = ConfigurationOptions.Parse(connString, true);
+        return ConnectionMultiplexer.Connect(configuraion);
+    }
+);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(
     options =>
