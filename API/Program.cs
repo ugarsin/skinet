@@ -1,6 +1,7 @@
 using API.Middleware;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
@@ -17,6 +18,7 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(
         return ConnectionMultiplexer.Connect(configuraion);
     }
 );
+builder.Services.AddSingleton<ICartService, CartService>();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(
     options =>
