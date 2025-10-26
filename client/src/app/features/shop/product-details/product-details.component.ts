@@ -9,6 +9,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatDivider, MatDividerModule } from "@angular/material/divider";
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../../core/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -29,6 +30,7 @@ export class ProductDetailsComponent implements OnInit{
   private shopService = inject(ShopService);
   private activatedRoute = inject(ActivatedRoute);
   product?: Product;
+  cartService = inject(CartService);
 
   ngOnInit(): void {
     this.loadProduct();
