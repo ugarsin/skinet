@@ -15,20 +15,21 @@ export class CartService {
   cart = signal<Cart | null>(null);
   itemCount = computed(() => {
     return this.cart()?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0
-  }); 
+  });
   totals = computed(() => {
+    console.log("===========computing==============");
     const cart = this.cart();
     if (!cart) return null;
-    const subtotal = cart.items.reduce((sum, item) => sum + item.price *  item.quantity, 0);
+    const subtotal = cart.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const shipping = 0;
     const discount = 0;
     return {
-      subtotal, 
+      subtotal,
       shipping,
       discount,
       total: subtotal + shipping - discount
     }
-  }); 
+  });
 
   constructor() {
     // 👇 Automatically restore cart if user already has one
@@ -41,7 +42,7 @@ export class CartService {
     }
   }
 
-  getCart(id: string){
+  getCart(id: string) {
     return this.http.get<Cart>(this.baseUrl + 'cart?id=' + id).pipe(
       map(cart => {
         this.cart.set(cart);
@@ -75,6 +76,76 @@ export class CartService {
     });
   }
 
+  // removeItemFromCart(productId: number, quantity = 1) {
+  //   // console.log(productId);
+  //   const cart = this.cart();
+  //   if (!cart) return;
+  //   // console.log(cart.items[cart.items.findIndex(x => x.productId == productId)].quantity);
+  //   const index = cart.items.findIndex(x => x.productId == productId)
+  //   if (index !== -1) {
+  //     if (cart.items[index].quantity > quantity) {
+  //       cart.items[index].quantity -= quantity;
+  //     } else {
+  //       cart.items.splice(index, 1);
+  //     }
+  //     if (cart.items.length === 0) {
+  //       console.log("Now empty");
+  //       this.deleteCart();
+  //     } else {
+  //       console.log("subtracting");
+  //       this.setCart(cart).subscribe({
+  //         // next: () => console.log('Cart updated on server'),
+  //         // error: err => console.error('Failed to sync cart', err)
+  //       });
+  //       // this.setCart(cart);
+  //     }
+  //     // this.cart.set(cart);
+  //   }
+  // }
+
+  removeItemFromCart(productId: number, quantity = 1) {
+    const cart = this.cart();
+    if (!cart) return;
+
+    const index = cart.items.findIndex(x => x.productId == productId);
+    if (index !== -1) {
+      if (cart.items[index].quantity > quantity) {
+        cart.items[index].quantity -= quantity;
+      } else {
+        cart.items.splice(index, 1);
+      }
+
+      if (cart.items.length === 0) {
+        console.log("Now empty");
+        this.deleteCart();
+      } else {
+        // 🟢 Make a *new* reference so signals re-run
+        this.cart.set({ ...cart, items: [...cart.items] });
+
+        this.setCart(this.cart()!).subscribe({
+          next: () => console.log('Cart updated on server')
+        });
+      }
+    }
+  }
+
+  // deleteCart() {
+  //   this.http.delete(this.baseUrl + 'card?id=' + this.cart()?.id).subscribe({
+  //     next: () => {
+  //       localStorage.removeItem('cart_id');
+  //       this.cart.set(null);
+  //     }
+  //   })
+  // }
+  deleteCart() {
+    this.http.delete(this.baseUrl + 'cart?id=' + this.cart()?.id).subscribe({
+      next: () => {
+        localStorage.removeItem('cart_id');
+        this.cart.set(null);
+      }
+    });
+  }
+
   addOrUpdateItem(items: CartItem[], item: CartItem, quantity: number): CartItem[] {
     const index = items.findIndex(x => x.productId == item.productId);
     if (index === -1) {
@@ -99,7 +170,7 @@ export class CartService {
     }
   }
 
-  private isProduct(item: CartItem | Product) : item is Product {
+  private isProduct(item: CartItem | Product): item is Product {
     return (item as Product).id !== undefined;
   }
 
@@ -107,8 +178,8 @@ export class CartService {
     const cart = new Cart();
     // ✅ Reuse existing ID or generate new one
     cart.id = localStorage.getItem('cart_id') ?? nanoid();
-    cart.items = [];    
-    
+    cart.items = [];
+
     // ✅ Save it to localStorage so we remember next time
     localStorage.setItem('cart_id', cart.id);
 
