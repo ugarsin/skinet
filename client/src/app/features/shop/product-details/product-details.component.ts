@@ -29,8 +29,10 @@ import { CartService } from '../../../core/services/cart.service';
 export class ProductDetailsComponent implements OnInit{
   private shopService = inject(ShopService);
   private activatedRoute = inject(ActivatedRoute);
+  protected cartService = inject(CartService);
   product?: Product;
-  cartService = inject(CartService);
+  quantityInCart = 0;
+  quantity = 1;
 
   ngOnInit(): void {
     this.loadProduct();
@@ -40,8 +42,33 @@ export class ProductDetailsComponent implements OnInit{
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (!id) return;
     this.shopService.getProduct(+id).subscribe({
-      next: product => this.product = product,
+      next: product => {
+        this.product = product;
+        this.updateQuantityInCart();
+      },
       error: error => console.log(error)
     });
+  }
+
+  updateCart() {
+    if (!this.product) return;
+    if (this.quantity > this.quantityInCart) {
+      const itemsToAdd = this.quantity - this.quantityInCart;
+      this.quantityInCart += itemsToAdd;
+      this.cartService.addItemToCart(this.product, itemsToAdd);
+    } else {
+      const itemsToRemove = this.quantityInCart - this.quantity;
+      this.quantityInCart -= itemsToRemove;
+      this.cartService.removeItemFromCart(this.product.id, itemsToRemove);
+    }
+  }
+
+  updateQuantityInCart() {
+    this.quantityInCart = this.cartService.cart()?.items.find(x => x.productId === this.product?.id)?.quantity || 0
+    this.quantity = this.quantityInCart || 1;
+  }
+
+  getButtonText() {
+    return this.quantityInCart > 0 ? "Update cart" : "Add to cart";
   }
 }
