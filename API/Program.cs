@@ -3,6 +3,7 @@ using Core.Entities;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
 
@@ -22,8 +23,15 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(
 builder.Services.AddSingleton<ICartService, CartService>();
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
+
 builder.Services.AddIdentityApiEndpoints<AppUser>()
     .AddEntityFrameworkStores<StoreContext>();
+
+//builder.Services.AddIdentityCore<AppUser>()
+//    .AddEntityFrameworkStores<StoreContext>()
+//    .AddSignInManager<SignInManager<AppUser>>()
+//    .AddDefaultTokenProviders();
+
 builder.Services.AddDbContext<StoreContext>(
     options =>
     {
@@ -38,6 +46,14 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+//    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+//    options.DefaultSignInScheme = IdentityConstants.ApplicationScheme;
+//});
+//.AddIdentityCookies(); 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -50,17 +66,19 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
-app.UseMiddleware<ExceptionMiddleware>();
-
 app.UseCors(
     options =>
     options
+    .AllowCredentials()
     .AllowAnyHeader()
     .AllowAnyMethod()
     .WithOrigins("http://localhost:4200", "https://localhost:4200")
 );
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<AppUser>();

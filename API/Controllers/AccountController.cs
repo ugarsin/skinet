@@ -37,9 +37,9 @@ namespace API.Controllers
                 {
                     ModelState.AddModelError(error.Code, error.Description);
                 }
-            
+                return ValidationProblem();
             }
-            return ValidationProblem();
+            return Ok();
         }
 
         [Authorize]

@@ -5,11 +5,10 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from './shared/models/products';
 import { Pagination } from './shared/models/pagination';
 import { ShopService } from './core/services/shop.service';
-import { ShopComponent } from "./features/shop/shop.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, ShopComponent],
+  imports: [RouterOutlet, HeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
