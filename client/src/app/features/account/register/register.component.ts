@@ -7,6 +7,7 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import { AccountService } from '../../../core/services/account.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../../core/services/snackbar.service';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,8 @@ import { SnackbarService } from '../../../core/services/snackbar.service';
     MatFormField,
     MatLabel,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    JsonPipe
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
