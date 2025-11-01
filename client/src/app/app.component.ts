@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from './shared/models/products';
 import { Pagination } from './shared/models/pagination';
 import { ShopService } from './core/services/shop.service';
+import { AccountService } from './core/services/account.service';
 
 @Component({
   selector: 'app-root',

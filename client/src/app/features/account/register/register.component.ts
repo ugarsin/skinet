@@ -1,25 +1,25 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, RequiredValidator, Validators } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardModule } from '@angular/material/card';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatError, MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { AccountService } from '../../../core/services/account.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../../core/services/snackbar.service';
 import { JsonPipe } from '@angular/common';
+import { TextInputComponent } from "../../../shared/components/text-input/text-input.component";
 
 @Component({
   selector: 'app-register',
   imports: [
     ReactiveFormsModule,
     MatCardModule,
-    MatFormField,
-    MatLabel,
     MatInputModule,
     MatButtonModule,
-    JsonPipe
-  ],
+    JsonPipe,
+    TextInputComponent
+],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -28,12 +28,13 @@ export class RegisterComponent {
   private accountService = inject(AccountService);
   private router = inject(Router);
   private snack = inject(SnackbarService);
+  validationErrors?: string[];
 
   registerForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    email: [''],
-    password: ['']
+    firstName: ['', Validators.required],
+    lastName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', Validators.required]
   });
 
   onSubmit() {
@@ -41,7 +42,8 @@ export class RegisterComponent {
       next: () => {
         this.snack.success("Registration is successful, you can now login");
         this.router.navigateByUrl("/account/login");
-      }
+      },
+      error: errors => this.validationErrors = errors
     })
   }
 }

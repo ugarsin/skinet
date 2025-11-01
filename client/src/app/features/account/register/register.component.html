@@ -3,23 +3,25 @@
         <div class="text-center mb-6">
             <h1 class="text-3xl font-semibold text-primary">Register</h1>
         </div>
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>First name</mat-label>
-            <input formControlName="firstName" type="text" placeholder="First name" matInput />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Last name</mat-label>
-            <input formControlName="lastName" type="text" placeholder="Last name" matInput />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Email address</mat-label>
-            <input formControlName="email" type="email" placeholder="name@example.com" matInput />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Password</mat-label>
-            <input formControlName="password" type="password" placeholder="Password" matInput />
-        </mat-form-field>
-        <button mat-flat-button type="submit" class="w-full py-2">Register</button>
+        <app-text-input formControlName="firstName" label="First name" type="text"></app-text-input>
+        <app-text-input formControlName="lastName" label="Last name" type="text"></app-text-input>
+        <app-text-input formControlName="email" label="Email address" type="email"></app-text-input>
+        <app-text-input formControlName="password" label="Password" type="password"></app-text-input>
+        @if (validationErrors) {
+            <div class="mb-3 p-4 bg-red-100 text-red-600">
+                <ul class="list-disc px-3">
+                    @for (error of validationErrors; track $index) {
+                        <li>{{error}}</li>
+                    }
+                </ul>
+            </div>
+        }
+        <button
+            [disabled]="registerForm.invalid" 
+            mat-flat-button 
+            type="submit" 
+            class="w-full py-2"
+        >Register</button>
     </form>
 </mat-card>
 <mat-card class="max-w-lg mx-auto mt-3 p-2">
